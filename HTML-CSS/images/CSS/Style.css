@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&display=swap');
+
+#root{
+    --primary-color: #a90f0f;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: gray;
+    background-image: url(../images/background-adare-restaurant.jpg);
+    background-size: cover;
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    
+}
+
+/*---Header---*/
+
+.container .header{
+    text-align: center;
+    height: 20vh;
+
+}
+/*---Img Logo---*/
+
+.container .header .img-container{
+    height: 15vh ;
+
+}
+.container .header .img-container .img-logo{
+    height: 10vh;
+}
+
+/* ---Navbar--- */
+
+.container .header .navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    margin: 0 auto;
+
+}
+
+.container .header .navbar .nav-item{
+    color: white;
+    text-decoration: none ;
+    font-size: 1.2em;
+    transition:all 0.3s ease;
+
+}
+
+.container .header .navbar .nav-item:hover{
+
+    color: var(--primary-color);
+    font-size: 1.4em;
+    text-decoration: underline;
+
+}
+
+@keyframes navItemHover{
+   
+    to{
+        color: var(--primary-color);
+        font-size: 1.4em;
+        text-decoration: underline;
+    }
+}
+
+/* ---Main content--- */
+
+.container .main-container{
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.container .main-container .main-text-container{
+    color: white;
+    padding: 2rem;
+}
+
+.container .main-container .main-text-container .main-text {
+    font-family:"Edu+SA", cursive;
+    font-size: 4em;
+    transition: all 0.3s;
+}
+
+.container .main-container .main-text-container .main-text:hover{
+    text-shadow: 0.05em 0.05em #a90f0f;
+}
+
+.container .main-container .main-text-container article{
+    margin: 0 auto;
+    max-width: 40vw;
+}
+
+.container .main-container .main-text-container article p{
+    color: rgb(143, 141, 141);
+    font-family: sans-serif;
+    font-size: 1.1em;
+}
+
+.container .main-container .main-text-container article p strong a{
+    text-decoration: none;
+    color: white;
+    text-shadow: 0.1em 0.1em #a90f0f ;
+}
+
+.container .main-container .maps-container .maps{
+    height: 50vh;
+    width: 60vw;
+}
+
+.container .footer {
+    color: white;
+    text-align: center;
+}
+
+.container .footer h4{
+    font-size: 1.1em;
+    
+
+}
