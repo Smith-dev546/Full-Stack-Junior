@@ -1,0 +1,81 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&family=Libertinus+Math&display=swap');
+
+:root{
+     --spacing-unit: 0.5rem;
+    --border-thin: 0.0625rem;
+    --primary-color: red;
+    --color-text: #ffffff;
+     --color-accent: #f1c40f;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset básico */
+
+body {
+    background-color: gray;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
+}
+
+.promo-navbar {
+    background-color: var(--primary-color);
+    border-bottom: var(--border-thin) solid rgba(255,255,255,0.1);
+    padding: calc(var(--spacing-unit) * 1.5) 0;
+    width: 100%;
+    text-align: center;
+    height: 6vh;
+    border-radius: 0.5rem
+}
+
+.container {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing-unit) * 0.9375);
+}
+
+.promo-text {
+    color: var(--color-text);
+    font-size: 1.125rem; /* 18px (aumentado de 15px) */
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0.0625rem 0.125rem rgba(0,0,0,0.2);
+}
+
+.asterisco {
+    color: var(--color-accent);
+    font-size: 0.75rem; /* 12px (aumentado de 10px) */
+    vertical-align: super;
+    margin-left: 0.125rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 48em) {
+    .promo-text {
+        font-size: 1rem; /* 16px en móviles */
+        padding: 0 calc(var(--spacing-unit) * 0.625);
+    }
+    
+    .asterisk {
+        font-size: 0.6875rem; /* 11px en móviles */
+    }
+}
+
+/* Estilo del navbar de busqueda */
+
+.navbar navbar-expand-lg navbar-light bg-white navbar{
+      background-color: var(--primary-color) !important;
+    border-bottom: var(--border-thin) solid rgba(255,255,255,0.1);
+    padding: calc(var(--spacing-unit) * 1.5) 0;
+    width: 100%;
+    text-align: center;
+    height: 6vh;
+    border-radius: 0.5rem
+}
