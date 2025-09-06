@@ -2,30 +2,42 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../repositories/firebase/config'
+import { useForm } from 'react-hook-form'
 
 const LoginComponent = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setError
+    } = useForm()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const onSubmit = async (data) => {
         setLoading(true)
-        setError('')
         
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            await signInWithEmailAndPassword(auth, data.email, data.password)
             navigate('/dashboard')
         } catch (error) {
             console.error('Error al iniciar sesión:', error)
             if (error.code === 'auth/invalid-credential') {
-                setError('Credenciales incorrectas. Por favor, verifica tu email y contraseña.')
+                setError('root', { 
+                    type: 'manual', 
+                    message: 'Credenciales incorrectas. Por favor, verifica tu email y contraseña.' 
+                })
             } else if (error.code === 'auth/user-not-found') {
-                setError('No existe una cuenta con este email.')
+                setError('root', { 
+                    type: 'manual', 
+                    message: 'No existe una cuenta con este email.' 
+                })
             } else {
-                setError('Error al iniciar sesión. Intenta nuevamente.')
+                setError('root', { 
+                    type: 'manual', 
+                    message: 'Error al iniciar sesión. Intenta nuevamente.' 
+                })
             }
         } finally {
             setLoading(false)
@@ -40,39 +52,57 @@ const LoginComponent = () => {
                         <div className="card-body p-4">
                             <h3 className="card-title text-center mb-4 text-light">Iniciar Sesión</h3>
                             
-                            {error && (
+                            {errors.root && (
                                 <div className="alert alert-danger" role="alert">
-                                    {error}
+                                    {errors.root.message}
                                 </div>
                             )}
                             
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label text-light">Email</label>
                                     <input
                                         type="email"
-                                        className="form-control bg-dark text-light border-dark"
+                                        className={`form-control bg-dark text-light border-dark ${
+                                            errors.email ? 'is-invalid' : ''
+                                        }`}
                                         id="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
                                         disabled={loading}
                                         placeholder="Ingresa tu email"
+                                        {...register('email', {
+                                            required: 'El email es requerido',
+                                            pattern: {
+                                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                                message: 'Email no válido'
+                                            }
+                                        })}
                                     />
+                                    {errors.email && (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.email.message}
+                                        </div>
+                                    )}
                                 </div>
                                 
                                 <div className="mb-4">
                                     <label htmlFor="password" className="form-label text-light">Contraseña</label>
                                     <input
                                         type="password"
-                                        className="form-control bg-dark text-light border-dark"
+                                        className={`form-control bg-dark text-light border-dark ${
+                                            errors.password ? 'is-invalid' : ''
+                                        }`}
                                         id="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
                                         disabled={loading}
                                         placeholder="Ingresa tu contraseña"
+                                        {...register('password', {
+                                            required: 'La contraseña es requerida'
+                                        })}
                                     />
+                                    {errors.password && (
+                                        <div className="invalid-feedback d-block">
+                                            {errors.password.message}
+                                        </div>
+                                    )}
                                 </div>
                                 
                                 <div className="d-grid mb-3">
